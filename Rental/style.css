@@ -1,0 +1,304 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    scroll-padding-top: 4rem;
+    list-style: none;
+    text-decoration: none;
+}
+
+/* Variabel */
+:root {
+    --main-color: #2288ff;
+    --second-color: #192f6a;
+    --text-color: #314862;
+    --bg-color: #fff;
+
+    /* Bayangan Box */
+    --box-shadow: 2px 2px 18px rgb(14 52 54/ 15%);
+}
+
+/* Setinggan Website */
+img {
+    width: 100%;
+}
+
+body {
+    color: var(--text-color);
+}
+
+section {
+    padding: 4.5rem 3rem;
+}
+
+.container {
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header {
+    display: block;
+    width: 100%;
+    background: var(--bg-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+/* setiingan navbar */
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 35px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.logo .bx {
+    font-size: 24px;
+    color: var(--main-color);
+}
+
+.navbar {
+    display: flex;
+}
+
+.navbar a {
+    padding: 8px 17px;
+    color: var(--text-color);
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.navbar a:hover {
+    color: var(--main-color);
+}
+
+.btn {
+    padding: 8px 22px;
+    background: var(--main-color);
+    color: var(--bg-color);
+    border-radius: 5rem;
+}
+
+.btn:hover {
+    background: #3492fd;
+}
+
+#menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+}
+
+#menu {
+    display: none;
+}
+
+/* Menu Home */
+.home {
+    margin-top: 5rem;
+    background: url(Gambar/home_mobil.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 600px;
+    border-radius: 1.0rem;
+    display: flex;
+    align-items: center;
+}
+
+/* Setting About */
+.about {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, auto));
+    gap: 2rem;
+}
+
+.about-img img {
+    border-radius: 3rem 0 3rem 3rem;
+}
+
+.about-text span {
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--main-color);
+}
+
+.about-text h2 {
+    font-size: 1.7rem;
+}
+
+.about-text p {
+    font-size: 0.928rem;
+    margin: 1rem 0 1rem;
+}
+
+/* Setting Kotak Fungsi */
+.kotak {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, auto));
+    gap: 3.5rem;
+}
+
+.kotak .box {
+    padding: 20px;
+    background: var(--bg-color);
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    border-radius: 2rem;
+}
+
+.kotak .box:hover {
+    background: var(--main-color);
+    color: var(--bg-color);
+    transition: 0.3s all linear;
+}
+
+.kotak .box .bx {
+    padding: 10px;
+    border-radius: 50%;
+    background: #f6f6fe;
+    color: var(--main-color);
+    font-size: 20px;
+}
+
+.kotak .box h3 {
+    font-size: 1.1rem;
+    margin: 1rem 0 0.4rem;
+}
+
+.kotak .box p {
+    font-size: 00.938rem;
+}
+
+/* Setting jenis mobil */
+.heading {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.heading span {
+    font-weight: 500;
+    color: var(--main-color);
+}
+
+.heading p {
+    font-size: 0.938rem;
+}
+
+.mobil {
+    background: #fbfbfb;
+    border-radius: 2rem;
+}
+
+.mobil-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, auto));
+    gap: 3rem;
+    padding: 0 50px;
+}
+
+.mobil-container .box {
+    background: var(--bg-color);
+    padding: 10px;
+    border-radius: 1rem;
+    box-shadow: var(--box-shadow);
+}
+
+.mobil-container .box:hover {
+    transform: translateY(-10px);
+    transition: 0.3s;
+}
+
+.mobil-container .box img {
+    border-radius: 1rem;
+    height: 180px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.mobil-container .box h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    float: left;
+}
+
+.mobil-container .box .content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+/* Footer */
+.footer {
+    background: var(--main-color);
+    color: var(--bg-color);
+    border-radius: 0;
+    height: 200px;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, auto));
+    gap: 2rem;
+}
+
+.footer-container h2 {
+    font-size: 1.7rem;
+    font-weight: 500;
+}
+
+.footer-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+
+.footer-box a {
+    font-size: 0.8rem;
+    color: var(--bg-color);
+    font-weight: 400;
+    margin-bottom: 0.5;
+}
+
+.footer-box a:hover {
+    color: var(--text-color);
+}
+
+.social a {
+    font-size: 20px;
+    margin-right: 1rem;
+}
+
+.social a:hover {
+    color: var(--second-color);
+}
+
+.copyright {
+    padding: 20px;
+    text-align: center;
+    color: var(--bg-color);
+    background: var(--main-color);
+}
