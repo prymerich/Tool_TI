@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if (password_verify($password, $row["password"])) {
                 // Login berhasil
-                header("Location: index.php");
+                header("Location: Home.php");
                 exit();
             } else {
                 $error_message = "Password salah. Silakan coba lagi.";
