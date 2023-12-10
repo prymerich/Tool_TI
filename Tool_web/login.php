@@ -9,7 +9,7 @@ function isUserLoggedIn()
 
 // Jika pengguna sudah login, redirect ke halaman dashboard atau halaman utama
 if (isUserLoggedIn()) {
-    header("Location: index.php"); // Ganti dengan halaman dashboard atau halaman utama setelah login
+    header("Location: customer.php"); // Ganti dengan halaman dashboard atau halaman utama setelah login
     exit();
 }
 
@@ -34,17 +34,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username = $_POST["username"];
         $password = $_POST["password"];
 
-        $query = "SELECT * FROM signup WHERE username='$username'";
-        $result = mysqli_query($konek, $query);
+        $result = mysqli_query($konek, "SELECT * FROM signup WHERE username='$username'");
 
-        if ($result && mysqli_num_rows($result) > 0) {
+        if (mysqli_num_rows($result) === 1) {
             $row = mysqli_fetch_assoc($result);
 
             if (password_verify($password, $row["password"])) {
                 // Login berhasil
-                session_start();
-                $_SESSION["username"] = $username;
-                header("Location: dashboard.php"); // Ganti dengan halaman dashboard atau halaman utama setelah login
+                header("Location: index.php");
                 exit();
             } else {
                 $error_message = "Password salah. Silakan coba lagi.";
@@ -92,8 +89,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="row align-items-center">
                         <div class="header-text mb-4">
                             <img src="logo.png" style="width:100px" class="me-2 mb-3 float-end">
-                            <h2>RENNY CAR</h2>
-                            <p>Selamat Datang</p>
+                            <h2>RENTAL-KUN</h2>
+                            <p>Tempat Untuk Menyewa Berbagai Mobil</p>
                         </div>
                         <div class="input-group mb-3">
                             <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Email address" name="username">
@@ -117,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <button class="btn btn-lg btn-outline-success w-100 fs-6" type="submit" name="action" value="login">Login</button>
                         </div>
                         <div class="input-group mb-3">
-                            <button class="btn btn-lg btn-primary w-100 fs-6" type="submit" name="action" value="signup">Sign Up</button>
+                            <button class="btn btn-lg btn-primary w-100 fs-6" type="submit" name="action" value="signup">Register</button>
                         </div>
                     </div>
                 </div>
