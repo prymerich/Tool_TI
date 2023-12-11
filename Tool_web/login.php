@@ -1,15 +1,13 @@
 <?php
 include "koneksi.php";
 
-// Fungsi untuk mengecek apakah pengguna sudah login
 function isUserLoggedIn()
 {
     return isset($_SESSION['username']);
 }
 
-// Jika pengguna sudah login, redirect ke halaman dashboard atau halaman utama
 if (isUserLoggedIn()) {
-    header("Location: customer.php"); // Ganti dengan halaman dashboard atau halaman utama setelah login
+    header("Location: customer.php");
     exit();
 }
 
@@ -20,28 +18,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username = $_POST["username"];
         $password = $_POST["password"];
 
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-        $query = "INSERT INTO signup (username, password) VALUES ('$username', '$hashed_password')";
-        $result = mysqli_query($konek, $query);
-
-        if ($result) {
-            $success_message = "Pendaftaran berhasil. Silakan login.";
+        // Validate password length
+        if (strlen($password) < 8 || strlen($password) > 20) {
+            $error_message = "Password harus antara 8 dan 20 karakter.";
         } else {
-            $error_message = "Gagal mendaftar. Silakan coba lagi.";
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+            // Use prepared statement to prevent SQL injection
+            $stmt = $konek->prepare("INSERT INTO signup (username, password) VALUES (?, ?)");
+            $stmt->bind_param("ss", $username, $hashed_password);
+
+            if ($stmt->execute()) {
+                $success_message = "Pendaftaran berhasil. Silakan login.";
+            } else {
+                $error_message = "Gagal mendaftar. Silakan coba lagi.";
+            }
+
+            $stmt->close();
         }
     } elseif ($action == "login") {
         $username = $_POST["username"];
         $password = $_POST["password"];
 
-        $result = mysqli_query($konek, "SELECT * FROM signup WHERE username='$username'");
+        $stmt = $konek->prepare("SELECT * FROM signup WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        if (mysqli_num_rows($result) === 1) {
-            $row = mysqli_fetch_assoc($result);
+        if ($result->num_rows === 1) {
+            $row = $result->fetch_assoc();
 
             if (password_verify($password, $row["password"])) {
-                // Login berhasil
-                header("Location: Home.php");
+                // Login successful
+                header("Location: index.php");
                 exit();
             } else {
                 $error_message = "Password salah. Silakan coba lagi.";
@@ -49,6 +58,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $error_message = "Akun tidak ditemukan. Silakan daftar terlebih dahulu.";
         }
+
+        $stmt->close();
     }
 }
 ?>
