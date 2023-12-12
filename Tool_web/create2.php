@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -18,54 +18,37 @@
             return $data;
         }
 
-        if (isset($_GET['id'])){
-            $id     = input($_GET["id"]);
-    
-            $sql    = "SELECT * FROM pegawai WHERE id='$id' ";
-            $hasil  = mysqli_query($konek, $sql);
-            $data   = mysqli_fetch_assoc($hasil);
-        }
-
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-            $id            = htmlspecialchars($_POST["id"]);
-            $nama          = htmlspecialchars($_POST["Nama"]);
-            $jenis_kelamin = htmlspecialchars($_POST["Jenis_Kelamin"]);
-            $alamat        = htmlspecialchars($_POST["Alamat"]);
-            $email         = htmlspecialchars($_POST["Email"]);
-            $nohp          = htmlspecialchars($_POST["No_HP"]);
+            $nama          = input($_POST["Nama"]);
+            $jenis_kelamin = input($_POST["jenis_kelamin"]);
+            $lahir         = input($_POST["tgl_lahir"]);
+            $umur          = input($_POST["umur"]);
+            $alamat        = input($_POST["Alamat"]);
+            $email         = input($_POST["Email"]);
+            $nohp          = input($_POST["No_Hp"]);
 
-            $sql="UPDATE pegawai SET
-                Nama='$nama',
-                Jenis_Kelamin='$jenis_kelamin',
-                Alamat='$alamat',
-                Email='$email',
-                No_hp='$nohp'
-                WHERE id=$id";
+            
 
+            $sql    ="INSERT INTO customer (Nama, jenis_kelamin, tgl_lahir, umur, Alamat, Email, No_Hp) VALUES ('$nama', '$jenis_kelamin', '$lahir', '$umur', '$alamat', '$email', '$nohp')";
             $hasil = mysqli_query($konek, $sql);
 
             if ($hasil) {
-                header("Location:index.php");
+                header("Location: customer.php");
             }
             else {
                 echo "<div class='alert alert-danger'> Data Gagal Disimpan. </div>";
     
             }
         }
-        
         ?>
 
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <div class="col-10 m-auto" style="padding: 100px 0px 0 0 0;">
-        <h2 class="text-center fw-bold mt-5">Ubah Data Pegawai</h2>
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">ID</label>
-            <input name="ID" type="text" class="form-control" id="exampleFormControlinput1" placeholder="<?php echo($id) ?>">
-        </div>
+        <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+            <div class="col-10 m-auto" style="padding: 100px 0px 0 0 0;">
+        <h2 class="text-center fw-bold mt-5">Tambah Data Pelanggan</h2>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Nama</label>
-            <input name="Nama" type="text" class="form-control" id="exampleFormControlinput1" placeholder="<?php echo $data["Nama"]; ?>" required>
+            <input name="Nama" type="text" class="form-control" id="exampleFormControlinput1" placeholder="ex : Richad Krishna" required>
         </div>
         <div class="mb-3">
             <p>Jenis Kelamin</p>
@@ -76,25 +59,33 @@
             <label for="gender1input" class="form-label">Perempuan</label>
         </div>
         <div class="mb-3">
+            <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
+            <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" required>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Umur</label>
+            <input name="umur" type="text" class="form-control" id="exampleFormControlinput1" placeholder="contoh@gmail.com">
+        </div>
+        <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Alamat</label>
-            <textarea name="Alamat" class="form-control" id="exampleFormControlinput1" placeholder="<?php echo $data["Alamat"]; ?>" required></textarea>
+            <textarea name="Alamat" class="form-control" id="exampleFormControlinput1" placeholder="Masukkan Alamat" required></textarea>
         </div>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Email</label>
-            <input name="Email" type="text" class="form-control" id="exampleFormControlinput1" placeholder="<?php echo $data["Email"]; ?>">
+            <input name="Email" type="text" class="form-control" id="exampleFormControlinput1" placeholder="contoh@gmail.com">
         </div>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">No HP</label>
-            <input name="No HP" type="text" class="form-control" id="exampleFormControlinput1" placeholder="<?php echo $data["No_HP"]; ?>">
+            <input name="No HP" type="text" class="form-control" id="exampleFormControlinput1" placeholder="contoh : 0817485247">
         </div>
+        
         <div class="d-grid gap-2 col-9 mx-auto">
             <input type="hidden" name="id" value="<?php echo $data['id']; ?>" />
-            <button class="btn btn-md btn-warning px-5 mt-5 mb-5">Simpan</button>
-        </div>
-            
-        </form>
+            <button class="btn btn-md btn-primary px-5 mt-5 mb-5"><h5>Simpan</h5></button>
+        </div><br>
     </div>
-
+    </form>
+</div>
   
   
 

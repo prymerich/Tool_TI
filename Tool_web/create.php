@@ -70,7 +70,7 @@
         </div>
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">No HP</label>
-            <input name="No HP" type="text" class="form-control" id="exampleFormControlinput1" placeholder="+62">
+            <input name="No HP" type="text" class="form-control" id="exampleFormControlinput1" placeholder="contoh : 0817485247">
         </div>
         
         <div class="d-grid gap-2 col-9 mx-auto">

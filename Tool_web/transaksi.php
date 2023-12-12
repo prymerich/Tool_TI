@@ -1,3 +1,25 @@
+<?php
+include "koneksi.php";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $namaPelanggan = $_POST["pelanggan"];
+    $tanggalTransaksi = $_POST["tanggal_transaksi"];
+    $totalHarga = $_POST["totalHarga"];
+
+    // Query untuk menyimpan data ke dalam tabel transaksi
+    $sql = "INSERT INTO transaksi (pelanggan, tanggal_transaksi, total_harga) VALUES ('$namaPelanggan', '$tanggalTransaksi', '$totalHarga')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Transaksi berhasil ditambahkan.";
+    } else {
+        echo "Error: " . $sql . "<br>";
+    }
+}
+
+// Tutup koneksi setelah digunakan
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,8 +53,6 @@
                     <td>2023-01-01</td>
                     <td>$100</td>
                     <td>
-                        <a href="#" class="btn btn-info mb-2">Detail</a>
-                        <a href="#" class="btn btn-danger mb-2">Hapus</a>
                     </td>
                 </tr>
                 <!-- Akhir dari data yang diambil dari database -->
